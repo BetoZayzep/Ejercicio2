@@ -1,17 +1,50 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Intro with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+class Alumno {
+    private final String nombre;
+    private final int[] calificaciones;
 
-        // Press Mayús+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+    public Alumno(String nombre, int[] calificaciones) {
+        this.nombre = nombre;
+        this.calificaciones = calificaciones;
+    }
 
-            // Press Mayús+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+    public double calcularPromedio() {
+        int suma = 0;
+        for (int calificacion : calificaciones) {
+            suma += calificacion;
         }
+        return (double) suma / calificaciones.length;
+    }
+
+    public char obtenerCalificacionFinal(double promedio) {
+        if (promedio <= 50) {
+            return 'F';
+        } else if (promedio <= 60) {
+            return 'E';
+        } else if (promedio <= 70) {
+            return 'D';
+        } else if (promedio <= 80) {
+            return 'C';
+        } else if (promedio <= 90) {
+            return 'B';
+        } else {
+            return 'A';
+        }
+    }
+
+    public void imprimirResultados() {
+        System.out.println("Nombre del estudiante: " + nombre);
+        for (int i = 0; i < calificaciones.length; i++) {
+            System.out.println("Calificación " + (i + 1) + ": " + calificaciones[i]);
+        }
+        double promedio = calcularPromedio();
+        char calificacion = obtenerCalificacionFinal(promedio);
+        System.out.println("Promedio: " + promedio);
+        System.out.println("Calificación: " + calificacion);
+    }
+
+    public static void main(String[] args) {
+        int[] calificaciones = {75, 80, 65, 90, 85}; // ejemplo de calificaciones
+        Alumno alumno = new Alumno("Alberto", calificaciones);
+        alumno.imprimirResultados();
     }
 }
